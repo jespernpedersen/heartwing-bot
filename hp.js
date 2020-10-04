@@ -1,11 +1,3 @@
-require('dotenv').config();
-const Discord = require('discord.js');
-const bot = new Discord.Client();
-const TOKEN = process.env.TOKEN;
-const prefix = 'hw!';
-
-bot.login(TOKEN);
-
 // HP Variables
 let hp = 0;
 let hp_initialized = false;
@@ -16,12 +8,7 @@ let race_text = `Hi! I am here to help you with your character's HP. First of al
 let age_text = 'Is your dragon character a whelp, drake, matured dragon, wyrm or an elderwyrm? ';
 let specialization_text = `Is your character a tank, healer, long-range or a melee? `;
 let result_text = 'Your final HP is ';
-let error = "Error. Contact Jes."
 
-bot.on('ready', () => {
-    console.info(`Logged in as ${bot.user.tag}!`);
-    bot.user.setActivity("Killing HW members");
-});
 
 bot.on("message", async message => {
     // Ignore other bots
@@ -68,6 +55,7 @@ bot.on("message", async message => {
     }
     if (response === 'dragon') {
         if (hp_initialized) {
+            hp = 25;
             age_initialized = true;
             is_dragon = true;
             message.author.send(age_text);
@@ -106,8 +94,6 @@ bot.on("message", async message => {
                 age = 25;
             } else if (response === 'matured' || 'matured dragon') {
                 age = 75;
-            } else if (response === 'elder' || 'elder wyrm') {
-                age = 200;
             }
             SpecNext();
         } else {
@@ -116,17 +102,8 @@ bot.on("message", async message => {
     }
 
     // Specialization Replies
-    if (
-        response === 'tank' ||
-        response === 'healer' ||
-        response === 'melee' ||
-        response === 'long range' ||
-        response === 'long' ||
-        response === 'magic' ||
-        response === 'magic user'
-    ) {
+    if (response === 'tank' || response === 'healer') {
         if (hp_initialized && age_initialized && specialization_initialized) {
-            // Tank Reply
             if (response === 'tank') {
                 if (age_initialized) {
                     if (is_dragon) {
@@ -138,65 +115,50 @@ bot.on("message", async message => {
                     }
                     ResetHP();
                 }
-            }
-            // Healer Reply
-            else if (response === 'healer') {
+            } else if (response === 'healer') {
                 specialization = -5;
                 if (age_initialized) {
                     if (is_dragon) {
+                        // Do Dragon
                         message.author.send("Dragon: " + result_text + (hp + age + specialization));
-                    } else {
-                        message.author.send(error);
                     }
                 } else {
-                    message.author.send("Mortal: " + result_text + (hp + specialization));
-                }
-                ResetHP();
-            }
-            // Melee Reply
-            else if (response === 'melee') {
-                specialization = 10;
-                if (age_initialized) {
-                    if (is_dragon) {
-                        message.author.send("Dragon: " + result_text + (hp + age + specialization));
-                    } else {
-                        message.author.send(error);
-                    }
-                } else {
-                    message.author.send("Mortal: " + result_text + (hp + specialization));
-                }
-                ResetHP();
-            }
-            // Magic Reply
-            else if (response === 'magic user' || response === 'magic') {
-                specialization = -5;
-                if (age_initialized) {
-                    if (is_dragon) {
-                        message.author.send("Dragon: " + result_text + (hp + age + specialization));
-                    } else {
-                        message.author.send(error);
-                    }
-                } else {
-                    message.author.send("Mortal: " + result_text + (hp + specialization));
-                }
-                ResetHP();
-            }
-            // Long Range Reply
-            else if (response === 'long range' || response == 'long') {
-                specialization = 0;
-                if (age_initialized) {
-                    if (is_dragon) {
-                        message.author.send("Dragon: " + result_text + (hp + age + specialization));
-                    } else {
-                        message.author.send(error);
-                    }
-                } else {
+                    // Do Mortal
                     message.author.send("Mortal: " + result_text + (hp + specialization));
                 }
                 ResetHP();
             }
         } else {
             return;
+        }
+    } else if (response === 'healer') {
+        specialization = -5;
+        if (is_dragon) {
+            message.author.send(result_text + (hp + age + specialization))
+        } else {
+            message.author.send(result_text + (hp + specialization));
+        }
+
+    } else if (response === 'melee') {
+        specialization = 10;
+        if (is_dragon) {
+            message.author.send(result_text + (hp + age + specialization))
+        } else {
+            message.author.send(result_text + (hp + specialization));
+        }
+    } else if (response === 'magic user' || response === 'magic') {
+        specialization = -5;
+        if (is_dragon) {
+            message.author.send(result_text + (hp + age + specialization))
+        } else {
+            message.author.send(result_text + (hp + specialization));
+        }
+    } else if (response === 'long range' || response == 'long') {
+        specialization = 0;
+        if (is_dragon) {
+            message.author.send(result_text + (hp + age + specialization))
+        } else {
+            message.author.send(result_text + (hp + specialization));
         }
     } else {
         return;
@@ -214,3 +176,5 @@ bot.on("message", async message => {
         is_dragon = false;
     }
 });
+
+module.exports = hp;
