@@ -70,6 +70,7 @@ bot.on("message", async message => {
     }
     if (response === 'dragon') {
         if (hp_initialized) {
+            hp = 0;
             age_initialized = true;
             is_dragon = true;
             message.author.send(age_text);
@@ -188,7 +189,7 @@ bot.on("message", async message => {
                 specialization = 0;
                 if (age_initialized) {
                     if (is_dragon) {
-                        message.author.send("Dragon: " + result_text + (hp + age + specialization));
+                        message.author.send("Dragon: " + result_text + (age + specialization));
                     } else {
                         message.author.send(error);
                     }
