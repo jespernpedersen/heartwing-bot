@@ -52,6 +52,8 @@ bot.on("message", async message => {
         if (!hp_initialized) {
             hp_initialized = true;
             message.author.send(race_text)
+
+            setTimeout(ResetHP, 18000);
         }
     }
 
