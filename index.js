@@ -59,7 +59,11 @@ bot.on("message", async message => {
 
     // Other Commands
     if (command === 'patch') {
-        message.channel.send("You can download the Heartwing Patch at https://heartwing.dk/heartwing-patch/heartwing-patch.zip")
+        message.channel.send("You can download the Heartwing Patch at https://heartwing.dk/heartwing-patch/heartwing-patch.zip");
+    }
+
+    if (command === 'dicemaster') {
+        message.channel.send("You can download DiceMaster at https://heartwing.dk/dicemaster/dicemaster.rar");
     }
 
     // Race Replies
