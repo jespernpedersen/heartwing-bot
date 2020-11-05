@@ -58,12 +58,20 @@ bot.on("message", async message => {
     }
 
     // Other Commands
+    if (command === 'help') {
+        message.author.send("This is list of available Bot commands for Heartwing (use them in the Discord server): \n hw!hp \n hw!help \n hw!patch \n hw!dicemaster")
+    }
+
     if (command === 'patch') {
         message.channel.send("You can download the Heartwing Patch at https://heartwing.dk/heartwing-patch/heartwing-patch.zip");
     }
 
     if (command === 'dicemaster') {
         message.channel.send("You can download DiceMaster at https://heartwing.dk/dicemaster/dicemaster.rar");
+    }
+
+    if (command === "downloads") {
+        message.channel.send("You can download the Heartwing Patch here: https://heartwing.dk/heartwing-patch/heartwing-patch.zip \nDiceMaster can be downloaded here: https://heartwing.dk/dicemaster/dicemaster.rar");
     }
 
     // Race Replies
