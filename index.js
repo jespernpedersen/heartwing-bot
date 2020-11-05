@@ -57,6 +57,11 @@ bot.on("message", async message => {
         }
     }
 
+    // Other Commands
+    if (command === 'patch') {
+        message.channel.send("You can download the Heartwing Patch at https://heartwing.dk/heartwing-patch/heartwing-patch.zip")
+    }
+
     // Race Replies
     if (response === 'non-dragon') {
         if (hp_initialized) {
