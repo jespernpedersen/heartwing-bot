@@ -74,6 +74,15 @@ bot.on("message", async message => {
         message.channel.send("You can download the Heartwing Patch here: https://heartwing.dk/heartwing-patch/heartwing-patch.zip \nDiceMaster can be downloaded here: https://heartwing.dk/dicemaster/dicemaster.rar");
     }
 
+    // Count Members
+    if (command === 'count red') {
+        let guild = await message.guild.fetchMembers();
+        let roleID = '218857694872731649';
+        let memberCount = guild.roles.get(roleID).members.size;
+        message.channel.send("There are " + memberCount + "Red Dragons (per unique member)");
+
+    }
+
     // Race Replies
     if (response === 'non-dragon') {
         if (hp_initialized) {
