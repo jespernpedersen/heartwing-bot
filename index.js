@@ -65,6 +65,10 @@ bot.on("message", async message => {
         }
     }
 
+    if (command === 'rpcancel') {
+        ResetIcon();
+    }
+
     if (!hp_initialized) {
         // Also good practice to ignore any message that does not start with our prefix, 
         // which is set in the configuration file.
