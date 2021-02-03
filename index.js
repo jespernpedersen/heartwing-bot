@@ -20,7 +20,13 @@ let error = "Error. Contact Jes."
 
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
-    bot.user.setActivity("Killing HW members");
+    bot.user.setPresence({
+        status: "dnd", // You can show online, idle... Do not disturb is dnd
+        game: {
+            name: "hw!help || Heartwing", // The message shown
+            type: "PLAYING" // PLAYING, WATCHING, LISTENING, STREAMING,
+        }
+    });
 });
 
 bot.on("message", async message => {
@@ -40,6 +46,26 @@ bot.on("message", async message => {
 
     const response_args = message.content.trim().split(/ + /g);
     const response = response_args.shift().toLowerCase();
+
+    // Casual RP Notification
+    /* To Do: 
+        1. Create trigger by role ping
+        2. Change server icon
+        3. Timeout function -> change server icon
+    */
+
+   // Check if a role is being mentioned (only allow first mention)
+   if(message.mentions.roles.first()) {
+       // Change this id to be the role that is allowed to be mentioned
+       if(message.mentions.roles.first().id === '430078259552583681') {
+            console.log(message.guild.iconURL)
+            /*message.guild.setIcon('https://i.imgur.com/lQtdmvj.jpg')
+            .then(updated => console.log('Updated the guild icon'))
+            .catch(console.error);
+            setTimeout(ResetIcon, 3000);
+            */
+        }
+    }
 
     if (!hp_initialized) {
         // Also good practice to ignore any message that does not start with our prefix, 
@@ -75,12 +101,11 @@ bot.on("message", async message => {
     }
 
     // Count Members
-    if (command === 'count red') {
-        let guild = await message.guild.fetchMembers();
+    if (command === 'count') {
         let roleID = '218857694872731649';
-        let memberCount = guild.roles.get(roleID).members.size;
-        message.channel.send("There are " + memberCount + "Red Dragons (per unique member)");
-
+        let membersWithRole = message.guild.roles.get(roleID).members;
+        console.log(`Got ${membersWithRole.size} members with that role.`);
+        // message.channel.send("There are " + memberCount + "Red Dragons (per unique member)");
     }
 
     // Race Replies
@@ -241,5 +266,11 @@ bot.on("message", async message => {
         age_initialized = false;
         specialization_initialized = false;
         is_dragon = false;
+    }
+
+    function ResetIcon() {            
+        message.guild.setIcon('https://i.imgur.com/AhSqOIT.jpg')
+        .then(updated => console.log('Reverted to default'))
+        .catch(console.error);
     }
 });
