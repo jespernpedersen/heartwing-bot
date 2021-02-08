@@ -46,14 +46,7 @@ bot.on("message", async message => {
 
     const response_args = message.content.trim().split(/ + /g);
     const response = response_args.shift().toLowerCase();
-
-    // Casual RP Notification
-    /* To Do: 
-        1. Create trigger by role ping
-        2. Change server icon
-        3. Timeout function -> change server icon
-    */
-
+    
    // Check if a role is being mentioned (only allow first mention)
    if(message.mentions.roles.first()) {
        // Change this id to be the role that is allowed to be mentioned
