@@ -50,7 +50,8 @@ bot.on("message", async message => {
    // Check if a role is being mentioned (only allow first mention)
    if(message.mentions.roles.first()) {
        // Change this id to be the role that is allowed to be mentioned
-       if(message.mentions.roles.first().id === '603395872130334741') {
+       if(message.mentions.roles.first().id === '603666294696574986') {
+            console.log("Casual RP called!")
             message.guild.setIcon('https://i.imgur.com/45IdD3Z.jpg')
             // Time is set to 4 hours (milliseconds measurement)
             .then(updated => setTimeout(ResetIcon, 14400000))
