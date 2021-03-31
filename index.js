@@ -85,7 +85,7 @@ bot.on("message", async message => {
     }
 
     if (command === 'patch') {
-        message.channel.send("You can download the Heartwing Patch at https://heartwing.dk/heartwing-patch/heartwing-patch.zip");
+        message.channel.send("You can download the Heartwing Patch at https://heartwing.dk/heartwing-patch/Heartwing.zip");
     }
 
     if (command === 'dicemaster') {
@@ -93,7 +93,7 @@ bot.on("message", async message => {
     }
 
     if (command === "downloads") {
-        message.channel.send("You can download the Heartwing Patch here: https://heartwing.dk/heartwing-patch/heartwing-patch.zip \nDiceMaster can be downloaded here: https://heartwing.dk/dicemaster/dicemaster.rar");
+        message.channel.send("You can download the Heartwing Patch here: https://heartwing.dk/heartwing-patch/Heartwing.zip \nDiceMaster can be downloaded here: https://heartwing.dk/dicemaster/dicemaster.rar");
     }
 
     // Count Members
