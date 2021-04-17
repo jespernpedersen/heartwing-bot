@@ -51,7 +51,7 @@ bot.on("message", async message => {
    if(message.mentions.roles.first()) {
        // Change this id to be the role that is allowed to be mentioned
        if(message.mentions.roles.first().id === '603666294696574986') {
-            console.log("Casual RP called!")
+            console.log("Casual RP called!");
             message.guild.setIcon('https://i.imgur.com/45IdD3Z.jpg')
             // Time is set to 4 hours (milliseconds measurement)
             .then(updated => setTimeout(ResetIcon, 14400000))
@@ -98,10 +98,10 @@ bot.on("message", async message => {
 
     // Count Members
     if (command === 'count') {
+        let server = await message.guild.roles;
         let roleID = '218857694872731649';
-        let membersWithRole = message.guild.roles.get(roleID).members;
-        console.log(`Got ${membersWithRole.size} members with that role.`);
-        // message.channel.send("There are " + memberCount + "Red Dragons (per unique member)");
+        let memberCount = server.get(roleID).members.size;
+        console.log(memberCount);
     }
 
     // Race Replies
@@ -258,7 +258,7 @@ bot.on("message", async message => {
     }
 
     function ResetIcon() {            
-        message.guild.setIcon('https://i.imgur.com/AhSqOIT.jpg')
+        message.guild.setIcon('https://i.imgur.com/jelQl3H.gif')
         .then(updated => console.log('Reverted to default'))
         .catch(console.error);
     }
