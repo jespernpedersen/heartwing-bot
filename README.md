@@ -1,7 +1,3 @@
-# How to Build Your First Discord Bot with Node.js
-
-Michiel Mulders shows you how to install and set up a new Discord bot, which is made easier thanks to the API offered by the Discord.js package.
-
 ## Requirements
 
 - [Node.js](http://nodejs.org/)
